@@ -1,0 +1,3 @@
+class BlogAssets {
+  BlogAssets._();
+}
