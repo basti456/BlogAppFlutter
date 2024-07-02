@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
 import 'core/constants/blog_strings.dart';
 import 'core/themes/blog_themes.dart';
+import 'presentation/router/router_imports.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp( MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+   MyApp({super.key});
 
-  // This widget is the root of your application.
+  final _appRouter = AppRouter();
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: BlogStrings.appName,
       theme:BlogThemes.light,
       darkTheme: BlogThemes.dark,
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      routerConfig: _appRouter.config(),
     );
   }
 }
