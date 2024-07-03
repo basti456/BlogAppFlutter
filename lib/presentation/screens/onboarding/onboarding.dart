@@ -24,12 +24,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Image.asset(
-                  'assets/images/splash.png',
+                  BlogAssets.mainLogo,
                   color: BlogColors.splashScreenColor,
-                  height: he.height * 0.051,
-                  width: he.width * 0.378,
+                  height: 42.h,
+                  width: 139.w,
                 ),
-                (he.height * 0.0756).heightBox,
+                63.h.heightBox,
                 PageView(
                   controller: onboardingViewModel.pageController,
                   children: [
@@ -37,38 +37,38 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       imgPath: "assets/images/Onboarding1.png",
                       content:
                           "Discover, engage and read the latest articles as well as share your own thoughts and ideas with the community",
-                      height: he.height * 0.428,
-                      width: he.width,
+                      height: 333.h,
+                      width: 333.w,
                     ),
                     OnboardImgAndDesc(
                       imgPath: "assets/images/Onboarding3.png",
                       content:
                           "Explore a wide selection of categories, or use the search bar to find specific topics",
-                      height: he.height * 0.428,
-                      width: he.width,
+                      height: 333.h,
+                      width: 333.w,
                     ),
                     OnboardImgAndDesc(
                       imgPath: "assets/images/Onboarding2.png",
                       content:
                           "Customize your reading experience and join the conversation by creating an account.",
-                      height: he.height * 0.428,
-                      width: he.width,
+                      height: 333.h,
+                      width: 333.w,
                     ),
                   ],
                 ).expand(),
-                (he.height * 0.0723).heightBox,
+                (61.h).heightBox,
                 ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
                     backgroundColor: BlogColors.splashScreenColor,
-                    minimumSize: Size(he.width, he.height * 0.052),
+                    minimumSize: Size(he.width, 44.h),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(11),
+                      borderRadius: BorderRadius.circular(11.r),
                     ),
                   ),
                   child: "Get Started"
                       .text
-                      .size(16)
+                      .size(16.sp)
                       .fontWeight(FontWeight.w700)
                       .color(Colors.white)
                       .make(),
@@ -80,7 +80,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     "Skip"
                         .text
                         .color(BlogColors.splashScreenColor)
-                        .size(16)
+                        .size(16.sp)
                         .fontWeight(FontWeight.w700)
                         .make(),
                     SmoothPageIndicator(

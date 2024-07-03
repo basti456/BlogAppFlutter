@@ -24,7 +24,7 @@ class OnboardImgAndDesc extends StatelessWidget {
           width: width,
         ),
         content.text
-            .size(15)
+            .size(15.sp)
             .align(TextAlign.center)
             .fontWeight(FontWeight.w500)
             .make(),
