@@ -25,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     var he = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: BlogColors.primaryColor,
+      backgroundColor: BlogColors.splashScreenColor,
       body: Center(
         child: FadedScaleAnimation(
           child: Image.asset(

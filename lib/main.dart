@@ -1,22 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'core/constants/blog_strings.dart';
 import 'core/themes/blog_themes.dart';
 import 'presentation/router/router_imports.dart';
 
 void main() {
-  runApp( MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-   MyApp({super.key});
+  MyApp({super.key});
 
   final _appRouter = AppRouter();
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.dark));
     return MaterialApp.router(
       title: BlogStrings.appName,
-      theme:BlogThemes.light,
+      theme: BlogThemes.light,
       darkTheme: BlogThemes.dark,
+      debugShowCheckedModeBanner: false,
       routerConfig: _appRouter.config(),
     );
   }
