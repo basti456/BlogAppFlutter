@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'core/constants/blog_strings.dart';
 import 'core/themes/blog_themes.dart';
 import 'presentation/router/router_imports.dart';
@@ -17,12 +18,20 @@ class MyApp extends StatelessWidget {
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
         statusBarIconBrightness: Brightness.dark));
-    return MaterialApp.router(
-      title: BlogStrings.appName,
-      theme: BlogThemes.light,
-      darkTheme: BlogThemes.dark,
-      debugShowCheckedModeBanner: false,
-      routerConfig: _appRouter.config(),
+    return ScreenUtilInit(
+      designSize: const Size(390, 844),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      useInheritedMediaQuery: true,
+      builder: (context,child) {
+        return MaterialApp.router(
+          title: BlogStrings.appName,
+          theme: BlogThemes.light,
+          darkTheme: BlogThemes.dark,
+          debugShowCheckedModeBanner: false,
+          routerConfig: _appRouter.config(),
+        );
+      }
     );
   }
 }
