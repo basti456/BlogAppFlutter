@@ -18,7 +18,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       body: SafeArea(
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+            padding:  EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -34,21 +34,21 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   controller: onboardingViewModel.pageController,
                   children: [
                     OnboardImgAndDesc(
-                      imgPath: "assets/images/Onboarding1.png",
+                      imgPath: BlogAssets.onboarding1,
                       content:
                           "Discover, engage and read the latest articles as well as share your own thoughts and ideas with the community",
                       height: 333.h,
                       width: 333.w,
                     ),
                     OnboardImgAndDesc(
-                      imgPath: "assets/images/Onboarding3.png",
+                      imgPath: BlogAssets.onboarding3,
                       content:
                           "Explore a wide selection of categories, or use the search bar to find specific topics",
                       height: 333.h,
                       width: 333.w,
                     ),
                     OnboardImgAndDesc(
-                      imgPath: "assets/images/Onboarding2.png",
+                      imgPath: BlogAssets.onboarding2,
                       content:
                           "Customize your reading experience and join the conversation by creating an account.",
                       height: 333.h,
@@ -58,7 +58,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ).expand(),
                 (61.h).heightBox,
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    AutoRouter.of(context).push(const AuthRoute());
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: BlogColors.splashScreenColor,
                     minimumSize: Size(he.width, 44.h),
@@ -73,7 +75,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       .color(Colors.white)
                       .make(),
                 ),
-                (he.height * 0.0723).heightBox,
+                (63.h).heightBox,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -88,13 +90,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       count: 3,
                       axisDirection: Axis.horizontal,
                       effect: const WormEffect(
-                        activeDotColor: BlogColors.splashScreenColor,
-                        dotHeight: 12.0,
-                        dotWidth: 12.0
-                      ),
-                      onDotClicked: (index){
-
-                      },
+                          activeDotColor: BlogColors.splashScreenColor,
+                          dotHeight: 12.0,
+                          dotWidth: 12.0),
+                      onDotClicked: (index) {},
                     ),
                     "Next"
                         .text
