@@ -38,27 +38,18 @@ class _AuthState extends State<Auth> {
                       .white
                       .make(),
                   20.h.heightBox,
-              Prima
+                  PrimaryButton(
+                    title: "Login",
+                    onPressed: () {
+                      AutoRouter.of(context).push(const LoginRoute());
+                    },
+                  ),
                   12.h.heightBox,
-                  ElevatedButton(
+                  OutlineButton(
                     onPressed: () {
                       AutoRouter.of(context).push(const RegisterRoute());
                     },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.transparent,
-                      minimumSize:
-                          Size(MediaQuery.of(context).size.width, 44.h),
-                      shape: RoundedRectangleBorder(
-                        side: const BorderSide(color: Colors.white),
-                        borderRadius: BorderRadius.circular(11.r),
-                      ),
-                    ),
-                    child: "Register"
-                        .text
-                        .size(16.sp)
-                        .fontWeight(FontWeight.w700)
-                        .color(Colors.white)
-                        .make(),
+                    title: "Register",
                   ),
                   20.h.heightBox
                 ],
@@ -68,3 +59,5 @@ class _AuthState extends State<Auth> {
         ));
   }
 }
+
+

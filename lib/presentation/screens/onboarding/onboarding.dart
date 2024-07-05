@@ -12,13 +12,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   OnboardingViewModel onboardingViewModel = OnboardingViewModel();
   @override
   Widget build(BuildContext context) {
-    var he = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Center(
           child: Padding(
-            padding:  EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
+            padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -57,24 +56,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   ],
                 ).expand(),
                 (61.h).heightBox,
-                ElevatedButton(
-                  onPressed: () {
-                    AutoRouter.of(context).push(const AuthRoute());
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: BlogColors.splashScreenColor,
-                    minimumSize: Size(he.width, 44.h),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(11.r),
-                    ),
-                  ),
-                  child: "Get Started"
-                      .text
-                      .size(16.sp)
-                      .fontWeight(FontWeight.w700)
-                      .color(Colors.white)
-                      .make(),
-                ),
+                PrimaryButton(
+                    title: "Get Started",
+                    onPressed: () {
+                      AutoRouter.of(context).push(const AuthRoute());
+                    }),
                 (63.h).heightBox,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

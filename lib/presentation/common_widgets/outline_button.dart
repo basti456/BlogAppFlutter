@@ -1,12 +1,12 @@
 part of 'common_widgets_imports.dart';
 
-class PrimaryButton extends StatelessWidget {
+class OutlineButton extends StatelessWidget {
   final String title;
   final VoidCallback onPressed;
 
-  const PrimaryButton({
+  const OutlineButton({
     super.key,
-    required this.title, 
+    required this.title,
     required this.onPressed,
   });
 
@@ -15,9 +15,10 @@ class PrimaryButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        backgroundColor: BlogColors.splashScreenColor,
+        backgroundColor: Colors.transparent,
         minimumSize: Size(MediaQuery.of(context).size.width, 44.h),
         shape: RoundedRectangleBorder(
+          side: const BorderSide(color: Colors.white),
           borderRadius: BorderRadius.circular(11.r),
         ),
       ),
