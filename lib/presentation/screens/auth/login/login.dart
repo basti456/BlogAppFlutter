@@ -90,7 +90,8 @@ class _LoginState extends State<Login> {
                                 ),
                               ),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   SizedBox(
                                     width: 180.w,
@@ -114,7 +115,11 @@ class _LoginState extends State<Login> {
                                 ],
                               ),
                               40.h.heightBox,
-                              PrimaryButton(title: "Login", onPressed: () {}),
+                              PrimaryButton(
+                                  title: "Login",
+                                  onPressed: () {
+                                    AutoRouter.of(context).push(const GeneralRoute());
+                                  }),
                               20.h.heightBox,
                               "Don't have an account?"
                                   .richText
@@ -122,11 +127,11 @@ class _LoginState extends State<Login> {
                                   .semiBold
                                   .color(BlogColors.splashScreenColor)
                                   .withTextSpanChildren([
-                                 TextSpan(
+                                TextSpan(
                                     text: "SignUp",
-                                    recognizer:TapGestureRecognizer()..onTap=()=>
-                                      AutoRouter.of(context).push(const RegisterRoute())
-                                    ,
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () => AutoRouter.of(context)
+                                          .push(const RegisterRoute()),
                                     style: const TextStyle(
                                       fontWeight: FontWeight.w700,
                                     ))
