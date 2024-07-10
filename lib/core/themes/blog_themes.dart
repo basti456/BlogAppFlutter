@@ -7,6 +7,10 @@ class BlogThemes {
   static final light = ThemeData(
       colorScheme: ColorScheme.fromSeed(seedColor: BlogColors.primaryColor),
       useMaterial3: true,
+      appBarTheme: const AppBarTheme(
+          color: BlogColors.splashScreenColor,
+          centerTitle: true,
+          titleTextStyle: TextStyle(color: Colors.white,),iconTheme: IconThemeData(color: Colors.white)),
       fontFamily: GoogleFonts.poppins().fontFamily);
 
   static final dark = ThemeData(
