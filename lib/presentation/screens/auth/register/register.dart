@@ -127,7 +127,7 @@ class _RegisterState extends State<Register> {
                                 ],
                               ),
                               40.h.heightBox,
-                              PrimaryButton(title: "Login", onPressed: () {}),
+                              PrimaryButton(title: "Register", onPressed: () {}),
                               20.h.heightBox,
                               "Already have an account?"
                                   .richText
