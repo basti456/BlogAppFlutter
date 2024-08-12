@@ -90,7 +90,17 @@ class _AddPostsState extends State<AddPosts> {
             ),
           ),
           20.h.heightBox,
-          QuillToolbar(child: child)
+          QuillSimpleToolbar(
+            configurations: const QuillSimpleToolbarConfigurations(),
+            controller: _controller,
+          ),
+          SizedBox(
+            height: 500,
+            child: QuillEditor.basic(
+              controller: _controller,
+              configurations: const QuillEditorConfigurations(checkBoxReadOnly: false),
+            ),
+          )
         ],
       ),
     );

@@ -58,8 +58,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 (61.h).heightBox,
                 PrimaryButton(
                     title: "Get Started",
+                    // onPressed: () {
+                    //   AutoRouter.of(context).push(const AuthRoute());
+                    // },
                     onPressed: () {
-                      AutoRouter.of(context).push(const AuthRoute());
+                      ApiClient().getRequest(path: ApiEndpointUrls.tags);
                     }),
                 (63.h).heightBox,
                 Row(
