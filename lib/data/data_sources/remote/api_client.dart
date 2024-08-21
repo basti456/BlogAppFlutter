@@ -34,7 +34,7 @@ class ApiClient {
       return response;
     } on DioException catch (e) {
       if (e.response != null) {
-        debugPrint(e.response!.data);
+        debugPrint(e.response!.data.toString());
         debugPrint(e.response!.headers.toString());
         debugPrint(e.response!.requestOptions.toString());
         throw ApiException(message: e.response!.statusMessage);
@@ -49,14 +49,15 @@ class ApiClient {
 
   Future<Response> postRequest(
       {required String path, required dynamic body}) async {
-    //Map body = {"title": "newlearning", "slug": "learning"};
+    final options = Options(headers: {
+      "Authorization": "Bearer 94|FpclncSZVzkbOQEUCz8GbWkkza3nE5P3oPQgPKKV"
+    });
     try {
-      var response = await dio.post(path,
-          data: body, options: Options(headers: {"Authorization": "Bearer"}));
+      var response = await dio.post(path, data: body, options: options);
       return response;
     } on DioException catch (e) {
       if (e.response != null) {
-        debugPrint(e.response!.data);
+        debugPrint(e.response!.data.toString());
         debugPrint(e.response!.headers.toString());
         debugPrint(e.response!.requestOptions.toString());
         throw ApiException(message: e.response!.statusMessage);

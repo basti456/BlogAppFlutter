@@ -39,7 +39,7 @@ dependencies:
   flutter_bloc: ^8.1.6
   velocity_x: ^4.2.1
   velocity_bloc: ^1.2.0
-  shared_preferences: ^2.2.3
+  shared_preferences: ^2.3.2
   auto_route: ^8.2.0
   google_fonts: ^6.2.1
   dio: ^5.4.3+1

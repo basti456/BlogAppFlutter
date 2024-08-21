@@ -1,12 +1,22 @@
+import 'package:blog_app/data/repository/auth_repo.dart';
+import 'package:blog_app/data/repository/repository.dart';
+import 'package:blog_app/data/repository/tags_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'core/constants/blog_strings.dart';
 import 'core/themes/blog_themes.dart';
 import 'presentation/router/router_imports.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(RepositoryProvider(
+    create: (context) => Repository(
+      tagsRepo: TagsRepo(),
+      authRepo: AuthRepo(),
+    ),
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -15,23 +25,22 @@ class MyApp extends StatelessWidget {
   final _appRouter = AppRouter();
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent));
+    SystemChrome.setSystemUIOverlayStyle(
+        const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
     return ScreenUtilInit(
-      designSize: const Size(390, 844),
-      minTextAdapt: true,
-      splitScreenMode: true,
-      useInheritedMediaQuery: true,
-      builder: (context,child) {
-        return MaterialApp.router(
-          title: BlogStrings.appName,
-          theme: BlogThemes.light,
-          darkTheme: BlogThemes.dark,
-          debugShowCheckedModeBanner: false,
-          routerConfig: _appRouter.config(),
-        );
-      }
-    );
+        designSize: const Size(390, 844),
+        minTextAdapt: true,
+        splitScreenMode: true,
+        useInheritedMediaQuery: true,
+        builder: (context, child) {
+          return MaterialApp.router(
+            title: BlogStrings.appName,
+            theme: BlogThemes.light,
+            darkTheme: BlogThemes.dark,
+            debugShowCheckedModeBanner: false,
+            routerConfig: _appRouter.config(),
+          );
+        });
   }
 }
 

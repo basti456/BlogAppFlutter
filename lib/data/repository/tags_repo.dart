@@ -1,6 +1,6 @@
-import 'package:blog_app/presentation/screens/general/tags/tags_model.dart';
+import 'dart:convert';
 import 'package:velocity_x/velocity_x.dart';
-
+import '../../presentation/screens/general/tags/tags_model.dart';
 import '../data_sources/remote/api_client.dart';
 import '../data_sources/remote/api_endpoint_urls.dart';
 
@@ -11,8 +11,7 @@ class TagsRepo extends ApiClient {
     try {
       final response = await getRequest(path: ApiEndpointUrls.tags);
       if (response.statusCode == 200) {
-        Vx.log(response.data);
-        return tagsModalFromJson(response.data);
+        return tagsModalFromJson(jsonEncode(response.data));
       }
       return TagsModal();
     } on Exception catch (e) {
