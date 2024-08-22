@@ -8,15 +8,25 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  late ProfileViewModel profileViewModel;
+
+  @override
+  void initState() {
+    profileViewModel = ProfileViewModel(repository: context.read<Repository>());
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        elevation:0,
+        elevation: 0,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              profileViewModel.logout(context);
+            },
             icon: const Icon(FeatherIcons.logOut).pOnly(right: 10.w),
           )
         ],

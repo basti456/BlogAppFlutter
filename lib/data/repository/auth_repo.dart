@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:blog_app/data/modals/message_model.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../../presentation/screens/auth/login/login_model.dart';
@@ -9,7 +10,7 @@ import '../data_sources/remote/api_endpoint_urls.dart';
 class AuthRepo extends ApiClient {
   AuthRepo();
 
-  Future<LoginModal> userLogin(String email, String password,context) async {
+  Future<LoginModal> userLogin(String email, String password, context) async {
     Map body = {"email": email, "password": password};
     try {
       final response =
@@ -21,6 +22,19 @@ class AuthRepo extends ApiClient {
     } on Exception catch (e) {
       VxToast.show(context, msg: e.toString());
       return LoginModal();
+    }
+  }
+
+  Future<MessageModal> userLogout(context) async {
+    try {
+      final response = await postRequest(path: ApiEndpointUrls.logout);
+      if (response.statusCode == 200) {
+        return messageModalFromJson(jsonEncode(response.data));
+      }
+      return MessageModal();
+    } on Exception catch (e) {
+      VxToast.show(context, msg: e.toString());
+      return MessageModal();
     }
   }
 }
