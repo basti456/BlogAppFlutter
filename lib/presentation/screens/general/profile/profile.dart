@@ -13,6 +13,7 @@ class _ProfileState extends State<Profile> {
   @override
   void initState() {
     profileViewModel = ProfileViewModel(repository: context.read<Repository>());
+    profileViewModel.getUserProfileData();
     super.initState();
   }
 
@@ -31,100 +32,120 @@ class _ProfileState extends State<Profile> {
           )
         ],
       ),
-      body: ListView(
-        children: [
-          Container(
-            height: 400.h,
-            width: MediaQuery.of(context).size.width,
-            decoration: const BoxDecoration(
-              color: BlogColors.splashScreenColor,
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(40),
-                bottomRight: Radius.circular(40),
-              ),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30),
-              child: Column(
-                children: [
-                  const CircleAvatar(
-                    backgroundImage: AssetImage(BlogAssets.onboarding3),
-                    radius: 70,
-                  ),
-                  10.h.heightBox,
-                  "Ekagra Agrawal".text.bold.white.xl2.make(),
-                  "akagraagarwal89@gmail.com".text.bold.xl.white.make(),
-                  20.h.heightBox,
-                  "Android Developer".text.xl.center.white.make(),
-                  15.h.heightBox,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        children: [
-                          "6".text.bold.xl3.white.make(),
-                          "Posts".text.bold.xl.white.make(),
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          "0".text.bold.xl3.white.make(),
-                          "Following".text.bold.xl.white.make(),
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          "0".text.bold.xl3.white.make(),
-                          "Followers".text.bold.xl.white.make(),
-                        ],
-                      ),
-                    ],
-                  )
-                ],
-              ),
-            ),
-          ),
-          20.h.heightBox,
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+      body:
+          BlocBuilder<VelocityBloc<ProfileModal>, VelocityState<ProfileModal>>(
+        bloc: profileViewModel.profileModalBloc,
+        builder: (context, state) {
+          if (state is VelocityInitialState) {
+            return const Center(
+              child: CircularProgressIndicator.adaptive(),
+            );
+          } else if (state is VelocityUpdateState) {
+            return ListView(
               children: [
-                "My Posts".text.xl3.bold.make(),
-                GridView.builder(
-                  itemCount: 4,
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 10,
-                      mainAxisSpacing: 13,
-                      childAspectRatio: 0.9),
-                  itemBuilder: (context, index) {
-                    return Column(
+                Container(
+                  height: 400.h,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: const BoxDecoration(
+                    color: BlogColors.splashScreenColor,
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(40),
+                      bottomRight: Radius.circular(40),
+                    ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 30),
+                    child: Column(
                       children: [
-                        Image.asset(BlogAssets.onboarding3).cornerRadius(10),
-                        6.h.heightBox,
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            "Netflix will charge money for password sharing"
-                                .text
-                                .medium
-                                .maxLines(2)
-                                .make()
-                                .expand(),
-                            const Icon(FeatherIcons.moreVertical)
-                          ],
+                        CircleAvatar(
+                          radius: 70,
+                          child: Initicon(
+                            text:state.data.userDetails!.name!,
+                            elevation: 4,
+                            size: 140,
+                          ),
                         ),
+                        10.h.heightBox,
+                        state.data.userDetails!.name!.text.bold.white.xl2
+                            .make(),
+                        state.data.userDetails!.email!.text.bold.xl.white.make(),
+                        20.h.heightBox,
+                        "Android Developer".text.xl.center.white.make(),
+                        15.h.heightBox,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              children: [
+                                state.data.postsCount!.text.bold.xl3.white.make(),
+                                "Posts".text.bold.xl.white.make(),
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                "0".text.bold.xl3.white.make(),
+                                "Following".text.bold.xl.white.make(),
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                "0".text.bold.xl3.white.make(),
+                                "Followers".text.bold.xl.white.make(),
+                              ],
+                            ),
+                          ],
+                        )
                       ],
-                    );
-                  },
+                    ),
+                  ),
+                ),
+                20.h.heightBox,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      "My Posts".text.xl3.bold.make(),
+                      GridView.builder(
+                        itemCount: state.data.posts!.length,
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                crossAxisSpacing: 10,
+                                mainAxisSpacing: 13,
+                                childAspectRatio: 0.9),
+                        itemBuilder: (context, index) {
+                          return Column(
+                            children: [
+                              CachedNetworkImage(imageUrl: state.data.posts![index].featuredimage!,)
+                                  .cornerRadius(10),
+                              6.h.heightBox,
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  state.data.posts![index].title!
+                                      .text
+                                      .medium
+                                      .maxLines(2)
+                                      .make()
+                                      .expand(),
+                                  const Icon(FeatherIcons.moreVertical)
+                                ],
+                              ),
+                            ],
+                          );
+                        },
+                      )
+                    ],
+                  ),
                 )
               ],
-            ),
-          )
-        ],
+            );
+          }
+          return const SizedBox();
+        },
       ),
     );
   }
