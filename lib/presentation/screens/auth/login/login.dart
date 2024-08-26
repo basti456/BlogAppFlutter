@@ -102,7 +102,7 @@ class _LoginState extends State<Login> {
                                   borderRadius: 10,
                                   borderType: VxTextFieldBorderType.roundLine,
                                   isPassword: true,
-                                  obscureText: false,
+                                  obscureText: true,
                                   controller: loginViewModel.passwordController,
                                   validator: (password) {
                                     if (password!.isEmpty) {

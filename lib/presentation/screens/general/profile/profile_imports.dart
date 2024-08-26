@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:blog_app/core/constants/blog_assets.dart';
 import 'package:blog_app/core/constants/blog_colors.dart';
 import 'package:blog_app/data/repository/repository.dart';
