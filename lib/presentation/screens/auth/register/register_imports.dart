@@ -1,6 +1,5 @@
 import 'package:animation_wrappers/animation_wrappers.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:blog_app/presentation/screens/auth/login/login_imports.dart';
 import 'package:blog_app/utils/validations.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';

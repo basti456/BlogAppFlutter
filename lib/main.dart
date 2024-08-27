@@ -1,3 +1,4 @@
+import 'package:blog_app/data/repository/categories_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,7 +16,8 @@ void main() {
     create: (context) => Repository(
       tagsRepo: TagsRepo(),
       authRepo: AuthRepo(),
-      postRepo:PostRepo(),
+      postRepo: PostRepo(),
+      categoriesRepo: CategoriesRepo(),
     ),
     child: MyApp(),
   ));

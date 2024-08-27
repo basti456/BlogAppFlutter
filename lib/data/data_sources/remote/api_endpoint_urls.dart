@@ -9,4 +9,7 @@ class ApiEndpointUrls {
   static const String register = "register";
   static const String userPosts = "user-posts";
   static const String logout = "logout";
+  static const String addCategories = "add-categories";
+  static const String updateCategories = "update-categories";
+  static const String deleteTags = "delete-tags";
 }
