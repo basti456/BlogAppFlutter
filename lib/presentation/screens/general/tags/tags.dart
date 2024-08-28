@@ -17,6 +17,69 @@ class _TagsState extends State<Tags> {
     super.initState();
   }
 
+  void _openDialog(
+    BuildContext context,
+    String dialogTitle,
+    String id,
+    bool isUpdate,
+    String title,
+    String slug,
+  ) {
+    tagsViewModel.titleController.text = title;
+    tagsViewModel.slugController.text = slug;
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(dialogTitle),
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextField(
+                  controller: tagsViewModel.titleController,
+                  decoration:
+                      const InputDecoration(hintText: "Enter title here"),
+                ),
+                TextField(
+                  controller: tagsViewModel.slugController,
+                  decoration:
+                      const InputDecoration(hintText: "Enter slug here"),
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              child: const Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+            ),
+            BlocBuilder<VelocityBloc<bool>, VelocityState<bool>>(
+              bloc: tagsViewModel.addUpdateModalBloc,
+              builder: (context, state) {
+                return TextButton(
+                  child: state.data
+                      ? const CircularProgressIndicator.adaptive()
+                      : const Text('OK'),
+                  onPressed: () {
+                    if (isUpdate) {
+                      tagsViewModel.updateTags(context, id);
+                    } else {
+                      tagsViewModel.addTags(context);
+                    }
+                  },
+                );
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +89,9 @@ class _TagsState extends State<Tags> {
         backgroundColor: BlogColors.splashScreenColor,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              _openDialog(context, "Add New Tag", "0", false, "", "");
+            },
             icon: const Icon(
               FeatherIcons.plus,
               color: Colors.white,
@@ -38,7 +103,9 @@ class _TagsState extends State<Tags> {
         bloc: tagsViewModel.tagsModalBloc,
         builder: (context, state) {
           if (state is VelocityInitialState) {
-            return const Center(child: CircularProgressIndicator.adaptive(),);
+            return const Center(
+              child: CircularProgressIndicator.adaptive(),
+            );
           } else if (state is VelocityUpdateState) {
             return ListView.separated(
                 itemBuilder: (context, index) {
@@ -52,7 +119,15 @@ class _TagsState extends State<Tags> {
                         child: Row(
                           children: [
                             IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                _openDialog(
+                                    context,
+                                    "Edit Tag",
+                                    tagData.id!.toString(),
+                                    true,
+                                    tagData.title!.toString(),
+                                    tagData.slug!.toString());
+                              },
                               icon: const Icon(
                                 FeatherIcons.edit2,
                                 color: Colors.green,

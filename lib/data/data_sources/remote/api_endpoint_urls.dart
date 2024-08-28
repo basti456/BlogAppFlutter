@@ -12,4 +12,6 @@ class ApiEndpointUrls {
   static const String addCategories = "add-categories";
   static const String updateCategories = "update-categories";
   static const String deleteTags = "delete-tags";
+  static const String updateTags = "update-tags";
+  static const String deleteCategories = "delete-categories";
 }

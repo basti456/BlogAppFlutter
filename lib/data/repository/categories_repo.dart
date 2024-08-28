@@ -3,7 +3,7 @@ import 'package:velocity_x/velocity_x.dart';
 import '../../presentation/screens/general/categories/categories_model.dart';
 import '../data_sources/remote/api_client.dart';
 import '../data_sources/remote/api_endpoint_urls.dart';
-import '../modals/categories_add_update_model.dart';
+import '../modals/add_update_model.dart';
 
 class CategoriesRepo extends ApiClient {
   CategoriesRepo();
@@ -21,7 +21,7 @@ class CategoriesRepo extends ApiClient {
     }
   }
 
-  Future<CategoryAddUpdateModal> updateCategories(
+  Future<AddUpdateModal> updateCategories(
       String id, String title, String slug) async {
     Map body = {"id": id, "title": title, "slug": slug};
     try {
@@ -31,17 +31,16 @@ class CategoriesRepo extends ApiClient {
         body: body,
       );
       if (response.statusCode == 200) {
-        return categoryAddUpdateModalFromJson(jsonEncode(response.data));
+        return addUpdateModalFromJson(jsonEncode(response.data));
       }
-      return CategoryAddUpdateModal();
+      return AddUpdateModal();
     } on Exception catch (e) {
       Vx.log(e);
-      return CategoryAddUpdateModal();
+      return AddUpdateModal();
     }
   }
 
-  Future<CategoryAddUpdateModal> addCategories(
-      String title, String slug) async {
+  Future<AddUpdateModal> addCategories(String title, String slug) async {
     Map body = {"title": title, "slug": slug};
     try {
       final response = await postRequest(
@@ -50,28 +49,28 @@ class CategoriesRepo extends ApiClient {
         body: body,
       );
       if (response.statusCode == 200) {
-        return categoryAddUpdateModalFromJson(jsonEncode(response.data));
+        return addUpdateModalFromJson(jsonEncode(response.data));
       }
-      return CategoryAddUpdateModal();
+      return AddUpdateModal();
     } on Exception catch (e) {
       Vx.log(e);
-      return CategoryAddUpdateModal();
+      return AddUpdateModal();
     }
   }
 
-  Future<CategoryAddUpdateModal> deleteCategories(String id) async {
+  Future<AddUpdateModal> deleteCategories(String id) async {
     try {
       final response = await postRequest(
-        path: "${ApiEndpointUrls.addCategories}/$id",
+        path: "${ApiEndpointUrls.deleteCategories}/$id",
         isTokenRequired: true,
       );
       if (response.statusCode == 200) {
-        return categoryAddUpdateModalFromJson(jsonEncode(response.data));
+        return addUpdateModalFromJson(jsonEncode(response.data));
       }
-      return CategoryAddUpdateModal();
+      return AddUpdateModal();
     } on Exception catch (e) {
       Vx.log(e);
-      return CategoryAddUpdateModal();
+      return AddUpdateModal();
     }
   }
 }
