@@ -54,6 +54,7 @@ dependencies:
   pretty_dio_logger: ^1.4.0
   flutter_html: ^3.0.0-beta.2
   flutter_initicon: ^3.0.1
+  image_picker: ^1.1.2
 
 dev_dependencies:
   flutter_test:

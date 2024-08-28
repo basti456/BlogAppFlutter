@@ -9,6 +9,60 @@ class AddPosts extends StatefulWidget {
 
 class _AddPostsState extends State<AddPosts> {
   final QuillController _controller = QuillController.basic();
+  File? _image;
+  final picker = ImagePicker();
+
+  //Image Picker function to get image from gallery
+  Future getImageFromGallery() async {
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+    setState(() {
+      if (pickedFile != null) {
+        _image = File(pickedFile.path);
+      }
+    });
+  }
+
+  //Image Picker function to get image from camera
+  Future getImageFromCamera() async {
+    final pickedFile = await picker.pickImage(source: ImageSource.camera);
+
+    setState(() {
+      if (pickedFile != null) {
+        _image = File(pickedFile.path);
+      }
+    });
+  }
+
+  //Show options to get image from camera or gallery
+  Future showOptions() async {
+    showCupertinoModalPopup(
+      context: context,
+      builder: (context) => CupertinoActionSheet(
+        actions: [
+          CupertinoActionSheetAction(
+            child: const Text('Photo Gallery'),
+            onPressed: () {
+              // close the options modal
+              Navigator.of(context).pop();
+              // get image from gallery
+              getImageFromGallery();
+            },
+          ),
+          CupertinoActionSheetAction(
+            child: const Text('Camera'),
+            onPressed: () {
+              // close the options modal
+              Navigator.of(context).pop();
+              // get image from camera
+              getImageFromCamera();
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,11 +83,15 @@ class _AddPostsState extends State<AddPosts> {
           Stack(
             alignment: Alignment.bottomRight,
             children: [
-              Image.network(
-                  "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"),
+              _image == null
+                  ? Image.network(
+                      "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png")
+                  : Image.file(_image!),
               IconButton(
                 padding: const EdgeInsets.all(4.0),
-                onPressed: () {},
+                onPressed: () {
+                  showOptions();
+                },
                 icon: const Icon(
                   FeatherIcons.camera,
                   color: BlogColors.splashScreenColor,
@@ -98,7 +156,8 @@ class _AddPostsState extends State<AddPosts> {
             height: 500,
             child: QuillEditor.basic(
               controller: _controller,
-              configurations: const QuillEditorConfigurations(checkBoxReadOnly: false),
+              configurations:
+                  const QuillEditorConfigurations(checkBoxReadOnly: false),
             ),
           )
         ],
