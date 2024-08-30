@@ -35,17 +35,17 @@ class HomeDetails extends StatelessWidget {
                           FeatherIcons.thumbsUp,
                           color: Colors.green,
                         )),
-                    post.like == null ? "0" : post.like.text.make(),
+                    post.like == null ? "0".text.make() : post.like.text.make(),
                     IconButton(
                         onPressed: () {},
                         icon: const Icon(
                           FeatherIcons.thumbsDown,
                           color: Colors.red,
                         )),
-                    post.dislike == null ? "0" : post.dislike.text.make(),
+                    post.dislike == null ? "0".text.make() : post.dislike.text.make(),
                   ],
                 ),
-                post.body!.text.make()
+                HtmlWidget(post.body!)
               ],
             ),
           ),

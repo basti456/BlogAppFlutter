@@ -1,5 +1,6 @@
 part of 'categories_imports.dart';
 
+@RoutePage<Category>()
 class Categories extends StatefulWidget {
   const Categories({super.key});
 
@@ -147,6 +148,9 @@ class _CategoriesState extends State<Categories> {
                         ],
                       ),
                     ),
+                    onTap: () {
+                      AutoRouter.of(context).maybePop<Category>(state.data.categories![index]);
+                    },
                   ),
                 );
               },

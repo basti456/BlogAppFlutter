@@ -1,5 +1,6 @@
 part of 'tags_imports.dart';
 
+@RoutePage<Tag>()
 class Tags extends StatefulWidget {
   const Tags({super.key});
 
@@ -143,6 +144,9 @@ class _TagsState extends State<Tags> {
                           ],
                         ),
                       ),
+                      onTap: () {
+                        AutoRouter.of(context).maybePop<Tag>(tagData);
+                      },
                     ),
                   );
                 },
