@@ -2,7 +2,9 @@ part of 'categories_imports.dart';
 
 @RoutePage<Category>()
 class Categories extends StatefulWidget {
-  const Categories({super.key});
+  const Categories({super.key, required this.navigateType});
+
+  final NavigateType navigateType;
 
   @override
   State<Categories> createState() => _CategoriesState();
@@ -17,6 +19,13 @@ class _CategoriesState extends State<Categories> {
         CategoriesViewModel(repository: context.read<Repository>());
     categoriesViewModel.getAllCategories();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    categoriesViewModel.titleController.dispose();
+    categoriesViewModel.slugController.dispose();
+    super.dispose();
   }
 
   void _openDialog(
@@ -87,7 +96,7 @@ class _CategoriesState extends State<Categories> {
     return Scaffold(
       appBar: AppBar(
         title: "Categories".text.size(16).color(Colors.white).makeCentered(),
-        automaticallyImplyLeading: false,
+        automaticallyImplyLeading: widget.navigateType == NavigateType.outer,
         backgroundColor: BlogColors.splashScreenColor,
         actions: [
           IconButton(
@@ -149,7 +158,10 @@ class _CategoriesState extends State<Categories> {
                       ),
                     ),
                     onTap: () {
-                      AutoRouter.of(context).maybePop<Category>(state.data.categories![index]);
+                      widget.navigateType == NavigateType.inner
+                          ? AutoRouter.of(context)
+                              .maybePop<Category>(state.data.categories![index])
+                          : null;
                     },
                   ),
                 );

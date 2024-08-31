@@ -18,6 +18,14 @@ class _AddPostsState extends State<AddPosts> {
   }
 
   @override
+  void dispose() {
+    addPostsViewModel._controller.dispose();
+    addPostsViewModel.titleController.dispose();
+    addPostsViewModel.slugController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -99,8 +107,8 @@ class _AddPostsState extends State<AddPosts> {
             builder: (context, state) {
               return InkWell(
                 onTap: () async {
-                  var data =
-                      await AutoRouter.of(context).push<Tag>(const TagsRoute());
+                  var data = await AutoRouter.of(context)
+                      .push<Tag>(TagsRoute(navigateType: NavigateType.inner));
                   addPostsViewModel.selectedTagBloc.onUpdateData(data);
                 },
                 child: Container(
@@ -130,7 +138,7 @@ class _AddPostsState extends State<AddPosts> {
               return InkWell(
                 onTap: () async {
                   var data = await AutoRouter.of(context)
-                      .push<Category>(const CategoriesRoute());
+                      .push<Category>(CategoriesRoute(navigateType: NavigateType.inner));
                   addPostsViewModel.selectedCategoryBloc.onUpdateData(data);
                 },
                 child: Container(

@@ -18,6 +18,13 @@ class _LoginState extends State<Login> {
   }
 
   @override
+  void dispose() {
+    loginViewModel.emailController.dispose();
+    loginViewModel.passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: BlogColors.splashScreenColor,
@@ -144,7 +151,8 @@ class _LoginState extends State<Login> {
                                   ],
                                 ),
                                 40.h.heightBox,
-                                BlocBuilder<VelocityBloc<bool>, VelocityState<bool>>(
+                                BlocBuilder<VelocityBloc<bool>,
+                                    VelocityState<bool>>(
                                   bloc: loginViewModel.isLoadingBloc,
                                   builder: (context, state) {
                                     return PrimaryButton(

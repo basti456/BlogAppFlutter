@@ -9,6 +9,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i10;
+import 'package:blog_app/presentation/enums/navigate_type.dart' as _i14;
 import 'package:blog_app/presentation/screens/auth/auth_imports.dart' as _i1;
 import 'package:blog_app/presentation/screens/auth/login/login_imports.dart'
     as _i5;
@@ -23,7 +24,7 @@ import 'package:blog_app/presentation/screens/general/general_imports.dart'
 import 'package:blog_app/presentation/screens/general/home/home_imports.dart'
     as _i4;
 import 'package:blog_app/presentation/screens/general/home/home_model.dart'
-    as _i14;
+    as _i15;
 import 'package:blog_app/presentation/screens/general/tags/tags_imports.dart'
     as _i9;
 import 'package:blog_app/presentation/screens/general/tags/tags_model.dart'
@@ -46,9 +47,13 @@ abstract class $AppRouter extends _i10.RootStackRouter {
       );
     },
     CategoriesRoute.name: (routeData) {
+      final args = routeData.argsAs<CategoriesRouteArgs>();
       return _i10.AutoRoutePage<_i11.Category>(
         routeData: routeData,
-        child: const _i2.Categories(),
+        child: _i2.Categories(
+          key: args.key,
+          navigateType: args.navigateType,
+        ),
       );
     },
     GeneralRoute.name: (routeData) {
@@ -92,9 +97,13 @@ abstract class $AppRouter extends _i10.RootStackRouter {
       );
     },
     TagsRoute.name: (routeData) {
+      final args = routeData.argsAs<TagsRouteArgs>();
       return _i10.AutoRoutePage<_i12.Tag>(
         routeData: routeData,
-        child: const _i9.Tags(),
+        child: _i9.Tags(
+          key: args.key,
+          navigateType: args.navigateType,
+        ),
       );
     },
   };
@@ -116,16 +125,40 @@ class AuthRoute extends _i10.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i2.Categories]
-class CategoriesRoute extends _i10.PageRouteInfo<void> {
-  const CategoriesRoute({List<_i10.PageRouteInfo>? children})
-      : super(
+class CategoriesRoute extends _i10.PageRouteInfo<CategoriesRouteArgs> {
+  CategoriesRoute({
+    _i13.Key? key,
+    required _i14.NavigateType navigateType,
+    List<_i10.PageRouteInfo>? children,
+  }) : super(
           CategoriesRoute.name,
+          args: CategoriesRouteArgs(
+            key: key,
+            navigateType: navigateType,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'CategoriesRoute';
 
-  static const _i10.PageInfo<void> page = _i10.PageInfo<void>(name);
+  static const _i10.PageInfo<CategoriesRouteArgs> page =
+      _i10.PageInfo<CategoriesRouteArgs>(name);
+}
+
+class CategoriesRouteArgs {
+  const CategoriesRouteArgs({
+    this.key,
+    required this.navigateType,
+  });
+
+  final _i13.Key? key;
+
+  final _i14.NavigateType navigateType;
+
+  @override
+  String toString() {
+    return 'CategoriesRouteArgs{key: $key, navigateType: $navigateType}';
+  }
 }
 
 /// generated route for
@@ -147,7 +180,7 @@ class GeneralRoute extends _i10.PageRouteInfo<void> {
 class HomeDetailsRoute extends _i10.PageRouteInfo<HomeDetailsRouteArgs> {
   HomeDetailsRoute({
     _i13.Key? key,
-    required _i14.Post post,
+    required _i15.Post post,
     List<_i10.PageRouteInfo>? children,
   }) : super(
           HomeDetailsRoute.name,
@@ -172,7 +205,7 @@ class HomeDetailsRouteArgs {
 
   final _i13.Key? key;
 
-  final _i14.Post post;
+  final _i15.Post post;
 
   @override
   String toString() {
@@ -238,14 +271,38 @@ class SplashScreenRoute extends _i10.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i9.Tags]
-class TagsRoute extends _i10.PageRouteInfo<void> {
-  const TagsRoute({List<_i10.PageRouteInfo>? children})
-      : super(
+class TagsRoute extends _i10.PageRouteInfo<TagsRouteArgs> {
+  TagsRoute({
+    _i13.Key? key,
+    required _i14.NavigateType navigateType,
+    List<_i10.PageRouteInfo>? children,
+  }) : super(
           TagsRoute.name,
+          args: TagsRouteArgs(
+            key: key,
+            navigateType: navigateType,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'TagsRoute';
 
-  static const _i10.PageInfo<void> page = _i10.PageInfo<void>(name);
+  static const _i10.PageInfo<TagsRouteArgs> page =
+      _i10.PageInfo<TagsRouteArgs>(name);
+}
+
+class TagsRouteArgs {
+  const TagsRouteArgs({
+    this.key,
+    required this.navigateType,
+  });
+
+  final _i13.Key? key;
+
+  final _i14.NavigateType navigateType;
+
+  @override
+  String toString() {
+    return 'TagsRouteArgs{key: $key, navigateType: $navigateType}';
+  }
 }

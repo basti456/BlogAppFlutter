@@ -2,7 +2,9 @@ part of 'tags_imports.dart';
 
 @RoutePage<Tag>()
 class Tags extends StatefulWidget {
-  const Tags({super.key});
+  const Tags({super.key, required this.navigateType});
+
+  final NavigateType navigateType;
 
   @override
   State<Tags> createState() => _TagsState();
@@ -16,6 +18,13 @@ class _TagsState extends State<Tags> {
     tagsViewModel = TagsViewModel(repository: context.read<Repository>());
     tagsViewModel.getAllTags();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    tagsViewModel.titleController.dispose();
+    tagsViewModel.slugController.dispose();
+    super.dispose();
   }
 
   void _openDialog(
@@ -86,7 +95,7 @@ class _TagsState extends State<Tags> {
     return Scaffold(
       appBar: AppBar(
         title: "Tags".text.size(16).color(Colors.white).makeCentered(),
-        automaticallyImplyLeading: false,
+        automaticallyImplyLeading: widget.navigateType == NavigateType.outer,
         backgroundColor: BlogColors.splashScreenColor,
         actions: [
           IconButton(
@@ -145,7 +154,9 @@ class _TagsState extends State<Tags> {
                         ),
                       ),
                       onTap: () {
-                        AutoRouter.of(context).maybePop<Tag>(tagData);
+                        widget.navigateType == NavigateType.inner
+                            ? AutoRouter.of(context).maybePop<Tag>(tagData)
+                            : null;
                       },
                     ),
                   );

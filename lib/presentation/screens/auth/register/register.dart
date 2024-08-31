@@ -19,6 +19,14 @@ class _RegisterState extends State<Register> {
   }
 
   @override
+  void dispose() {
+    registerViewModel.nameController.dispose();
+    registerViewModel.emailController.dispose();
+    registerViewModel.passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: BlogColors.splashScreenColor,

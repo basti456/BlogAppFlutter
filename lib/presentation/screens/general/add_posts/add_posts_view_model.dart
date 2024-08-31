@@ -32,6 +32,15 @@ class AddPostsViewModel {
     }
   }
 
+  clear() {
+    selectedImageBloc.onUpdateData(null);
+    titleController.clear();
+    slugController.clear();
+    selectedCategoryBloc.onUpdateData(null);
+    selectedTagBloc.onUpdateData(null);
+    _controller.clear();
+  }
+
   addPost(context) async {
     isLoadingBloc.onUpdateData(true);
     var addPostData = await repository.postRepo.addPosts(
@@ -47,6 +56,7 @@ class AddPostsViewModel {
     );
     if (addPostData.status == 1) {
       VxToast.show(context, msg: addPostData.message.toString());
+      clear();
     }
     isLoadingBloc.onUpdateData(false);
   }

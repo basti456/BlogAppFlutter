@@ -10,6 +10,13 @@ class OnboardingScreen extends StatefulWidget {
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
   OnboardingViewModel onboardingViewModel = OnboardingViewModel();
+
+  @override
+  void dispose() {
+    onboardingViewModel.pageController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

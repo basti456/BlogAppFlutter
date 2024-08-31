@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:auto_route/auto_route.dart';
 import 'package:blog_app/core/constants/blog_colors.dart';
 import 'package:blog_app/data/repository/repository.dart';
+import 'package:blog_app/presentation/enums/navigate_type.dart';
 import 'package:blog_app/presentation/screens/general/categories/categories_model.dart';
 import 'package:blog_app/presentation/screens/general/tags/tags_model.dart';
 import 'package:feather_icons/feather_icons.dart';
